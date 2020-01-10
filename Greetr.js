@@ -39,6 +39,7 @@
 
         validate: function() {
             if (supportedLangs.indexOf(this.language) === -1) {
+                console.log(this.language);
                 throw "Invalid language";
             }
         },
@@ -79,6 +80,28 @@
             this.language = lang;
             this.validate();
             return this;
+        },
+
+        //jQuery enabled greeting. Insert message into html element
+        HTMLGreeting: function(selector, formal) {
+            if (!$) {
+                throw 'jQuery not loaded';
+            }
+
+            if (!selector) {
+                throw 'Missing jQuery selector';
+            }
+
+            var msg;
+            if (formal) {
+                msg = this.formalGreeting();
+            } else {
+                msg = this.greeting();
+            }
+
+            $(selector).html(msg);
+
+            return this;
         }
 
     }; 
@@ -89,6 +112,8 @@
             self.firstName = firstName || '';
             self.lastName = lastName || '';
             self.language = language || 'en';
+
+            self.validate();
     }
 
     Greetr.init.prototype = Greetr.prototype; //Gives all calls to Greetr the same properties as the prototype we'll define

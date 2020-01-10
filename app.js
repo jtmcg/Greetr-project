@@ -1,6 +1,12 @@
+//gets a new object (the architecture allows us to not use the 'new' keyword here)
 var g = G$("John", "Doe");
-//var g2 = G$2("John", "Doe");
-console.log(g);
-//console.log(g2);
 
-g.greet().greet(true).setLang('es').greet().greet(true);
+$('#login').click(function() {
+     var loginGrtr = G$('John', 'Doe')
+
+     $('#logindiv').hide();
+
+     //uses chainable methods to post a greeting on the webpage using jQuery
+     loginGrtr.setLang($('#lang').val()).HTMLGreeting('#greeting', true).log();
+
+});
